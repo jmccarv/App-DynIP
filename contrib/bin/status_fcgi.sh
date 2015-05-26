@@ -3,7 +3,7 @@
 dir=$HOME/app/DynIP
 . $dir/etc/fcgi.env
 
-pid=`cat $pidfile`
+pid=`cat $pidfile 2>/dev/null`
 test -z "$pid" && {
     echo "fastcgi not running for app $appname"
     exit 0
