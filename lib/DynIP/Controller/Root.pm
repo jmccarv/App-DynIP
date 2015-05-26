@@ -51,18 +51,12 @@ sub default :Path {
 sub auto :Private {
     my ( $self, $c ) = @_;
 
-    print Dumper ($c->config->{clients});
-
     # Make sure they're authorized to be here
     #my $token = $c->config->{AuthToken};
 
-    unless (defined $c->config->{clients} 
-            && ref($c->config->{clients}) eq 'HASH') {
-
-        $c->response->status(500);
-        $c->response->body('Misconfiguration, whoops');
-        return 0;
-    }
+    $c->forward('misconfigured'), return 0
+        unless (defined $c->config->{clients} 
+                && ref($c->config->{clients}) eq 'HASH');
 
     unless (defined $c->req->header('x-auth-token') 
             &&      defined $c->config->{clients}->{$c->req->header('x-auth-token')}) {
@@ -76,6 +70,14 @@ sub auto :Private {
     $c->stash->{client} = $c->config->{clients}->{$c->req->header('x-auth-token')};
 
     1;
+}
+
+sub misconfigured : Private {
+    my ( $self, $c ) = @_;
+
+    $c->response->status(500);
+    $c->response->body('Misconfiguration, whoops');
+    return 0;
 }
 
 =head2 end
