@@ -15,7 +15,7 @@ sub auto :Private {
     $c->detach('/go_away') unless $c->stash->{client};
 }
 
-sub index :Path('/client') :Args(0) {
+sub update :Local :Args(0) {
     my ( $self, $c ) = @_;
 
     unless (defined $c->req->address) {
