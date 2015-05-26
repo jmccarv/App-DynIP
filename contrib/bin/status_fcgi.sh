@@ -5,12 +5,12 @@ dir=$HOME/app/DynIP
 
 pid=`cat $pidfile 2>/dev/null`
 test -z "$pid" && {
-    echo "fastcgi not running for app $appname"
+    echo "fastcgi not running for app $APP_NAME"
     exit 0
 }
 
 ps $pid >/dev/null 2>&1 && {
-    echo "fastcgi running for app $appname with PID $pid"
+    echo "fastcgi running for app $APP_NAME with PID $pid"
     exit 0
 }
 
