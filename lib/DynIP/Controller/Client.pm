@@ -2,30 +2,32 @@ package DynIP::Controller::Client;
 use Moose;
 use namespace::autoclean;
 use Data::Dumper;
+use Proc::Lite;
 
 BEGIN { extends 'Catalyst::Controller' }
+
+sub auto :Private {
+    my ( $self, $c ) = @_;
+
+    $c->log->warn("Admin should not be at /client")
+        if ($c->stash->{is_admin});
+
+    $c->detach('/go_away') unless $c->stash->{client};
+}
 
 sub index :Path('/client') :Args(0) {
     my ( $self, $c ) = @_;
 
-    #print "Hello from client ".$c->stash->{client}." - ".$c->req->address."\n";
     my $addr = $c->req->address;
     my $server = $c->config->{name_server};
     my $domain = $c->config->{domain};
-    my $fqdn = $c->stash->{client}.'.'.$domain;
+    my $fqdn = $c->model->fqdn($c->stash->{client});
 
-    $c->forward('misconfigured'), return 0
+    $c->detach('/misconfigured')
         unless defined $addr && defined $server && defined $domain && defined $fqdn;
 
-my $update = <<EOT;
-server $server
-zone $domain
-update delete $fqdn
-update add $fqdn 86400 A $addr
-send
-EOT
-
-    print "update:\n$update\n";
+    $c->detach('/internal_error') 
+        unless $c->model->update($c->stash->{client}, $c->req->address);
 
     $c->res->status(200);
     $c->res->body('');

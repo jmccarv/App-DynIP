@@ -52,24 +52,45 @@ sub auto :Private {
     my ( $self, $c ) = @_;
 
     # Make sure they're authorized to be here
-    #my $token = $c->config->{AuthToken};
 
+    # First thing, all valid clients/admins must have this header
+    $c->detach('/go_away')
+        unless defined $c->req->header('x-auth-token');
+
+
+    # Admin user?
+    if (defined $c->config->{admin_token}
+        && $c->config->{admin_token} eq $c->req->header('x-auth-token')
+    ) {
+        $c->stash->{is_admin} = 1;
+        return 1;
+    }
+
+    
+    # Not admin, make sure we have our client config
     $c->forward('misconfigured'), return 0
         unless (defined $c->config->{clients} 
                 && ref($c->config->{clients}) eq 'HASH');
 
-    unless (defined $c->req->header('x-auth-token') 
-            &&      defined $c->config->{clients}->{$c->req->header('x-auth-token')}) {
 
-        $c->response->status(401);
-        $c->response->body('Go Away');
-
-        return 0;
+    # Authenticate client and stash their hostname
+    if (defined $c->config->{clients}->{$c->req->header('x-auth-token')}
+    ) {
+        $c->stash->{client} = $c->config->{clients}->{$c->req->header('x-auth-token')};
+        return 1;
     }
 
-    $c->stash->{client} = $c->config->{clients}->{$c->req->header('x-auth-token')};
 
-    1;
+    # I don't know who you are but you don't belong here
+    $c->detach('/go_away');
+}
+
+sub go_away : Private {
+    my ( $self, $c ) = @_;
+
+    $c->response->status(401);
+    $c->response->body('Go Away');
+    0;
 }
 
 sub misconfigured : Private {
@@ -77,7 +98,15 @@ sub misconfigured : Private {
 
     $c->response->status(500);
     $c->response->body('Misconfiguration, whoops');
-    return 0;
+    0;
+}
+
+sub internal_error : Private {
+    my ( $self, $c, $errmsg ) = @_;
+
+    $c->response->status(500);
+    $c->response->body(defined $errmsg ? $errmsg : 'Something went horribly wrong');
+    0;
 }
 
 =head2 end

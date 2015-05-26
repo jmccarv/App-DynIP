@@ -3,6 +3,7 @@ use Moose;
 use namespace::autoclean;
 
 use Catalyst::Runtime 5.80;
+use Log::Any::Adapter;
 
 # Set flags and add plugins for the application.
 #
@@ -24,7 +25,12 @@ use Catalyst qw/
 
 extends 'Catalyst';
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
+
+# So I can log in my models
+__PACKAGE__->log(Catalyst::Log->new());
+Log::Any::Adapter->set('Catalyst', logger => __PACKAGE__->log);
+
 
 # Configure the application.
 #
