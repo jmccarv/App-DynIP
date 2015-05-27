@@ -25,7 +25,7 @@ use Catalyst qw/
 
 extends 'Catalyst';
 
-our $VERSION = '0.04';
+our $VERSION = '0.05';
 
 # So I can log in my models
 __PACKAGE__->log(Catalyst::Log->new());

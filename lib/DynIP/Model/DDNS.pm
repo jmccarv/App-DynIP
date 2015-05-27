@@ -45,7 +45,7 @@ sub update {
     $log->debug("Updating zone:");
     $log->debug($_) for @update;
 
-        my $p = Proc::Lite->new(
+    my $p = Proc::Lite->new(
         command => [qw(nsupdate -k), $self->nsupdate_key ],
         stdin => \@update
     )->run;
