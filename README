@@ -1,1 +1,35 @@
+DynIP - A simple Catalyst application to dynamically update a BIND
+        server using nsupdate for clients with dynamically allocated IPs.
+
+You will need to have your name server configured to allow updates via
+the 'nsupdate' command.  See tutorials online for this.
+
+Clients connect to the /client/update endpoint of this app to request an update.
+See contrib/client for an example script
+
+A client must authenticate itself by setting the X-Auth-Token header.
+This token is used to determine if a client is allowed to update the server
+and what record the client updates.
+
+It is highly recommended you use SSL with this service, otherwise these tokens
+will be in the clear!
+
+
+There is also an /admin service for admin access.  Again, the X-Auth-Toekn
+header must be set correctly to gain access to the /admin service.
+
+There are the following endpoints under /admin:
+  /admin/update
+  /admin/delete
+
+  /admin/update takes two parameters, a hostname and an IP for that hostname
+  ex: /admin/update/darkstar/10.0.0.1
+
+  /admin/delete takes one parameter, a hostname to delete:
+  ex: /admin/delete/darkstar
+
 Run script/dynip_server.pl to test the application.
+
+Configuration for the application is done in the dynip.conf file in the root
+of this distribution.  See that file for further details.
+
