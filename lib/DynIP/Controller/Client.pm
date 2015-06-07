@@ -2,7 +2,6 @@ package DynIP::Controller::Client;
 use Moose;
 use namespace::autoclean;
 use Data::Dumper;
-use Proc::Lite;
 
 BEGIN { extends 'Catalyst::Controller' }
 
