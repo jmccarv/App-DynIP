@@ -1,5 +1,5 @@
-DynIP - A simple Catalyst application to dynamically update a BIND
-        server using nsupdate for clients with dynamically allocated IPs.
+App::DynIP - A simple Catalyst application to dynamically update a BIND
+             server using nsupdate for clients with dynamically allocated IPs.
 
 You will need to have your name server configured to allow updates via
 the 'nsupdate' command.  See tutorials online for this.
