@@ -1,4 +1,4 @@
-package DynIP::Controller::Admin;
+package App::DynIP::Controller::Admin;
 use Moose;
 use namespace::autoclean;
 use Data::Dumper;

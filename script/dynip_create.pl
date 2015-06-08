@@ -4,7 +4,7 @@ use strict;
 use warnings;
 
 use Catalyst::ScriptRunner;
-Catalyst::ScriptRunner->run('DynIP', 'Create');
+Catalyst::ScriptRunner->run('App::DynIP', 'Create');
 
 1;
 

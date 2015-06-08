@@ -1,4 +1,4 @@
-package DynIP::Model::DDNS;
+package App::DynIP::Model::DDNS;
 use Moose;
 use namespace::autoclean;
 use Proc::Lite;

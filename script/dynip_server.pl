@@ -5,7 +5,7 @@ BEGIN {
 }
 
 use Catalyst::ScriptRunner;
-Catalyst::ScriptRunner->run('DynIP', 'Server');
+Catalyst::ScriptRunner->run('App::DynIP', 'Server');
 
 1;
 

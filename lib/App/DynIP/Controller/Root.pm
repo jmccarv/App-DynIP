@@ -1,4 +1,4 @@
-package DynIP::Controller::Root;
+package App::DynIP::Controller::Root;
 use Moose;
 use namespace::autoclean;
 use Data::Dumper;
@@ -15,7 +15,7 @@ __PACKAGE__->config(namespace => '');
 
 =head1 NAME
 
-DynIP::Controller::Root - Root Controller for DynIP
+App::DynIP::Controller::Root - Root Controller for App::DynIP
 
 =head1 DESCRIPTION
 

@@ -1,4 +1,4 @@
-package DynIP;
+package App::DynIP;
 use Moose;
 use namespace::autoclean;
 
@@ -42,7 +42,7 @@ Log::Any::Adapter->set('Catalyst', logger => __PACKAGE__->log);
 # local deployment.
 
 __PACKAGE__->config(
-    name => 'DynIP',
+    name => 'App::DynIP',
     # Disable deprecated behavior needed by old applications
     disable_component_resolution_regex_fallback => 1,
     enable_catalyst_header => 1, # Send X-Catalyst header
@@ -55,7 +55,7 @@ __PACKAGE__->setup();
 
 =head1 NAME
 
-DynIP - Catalyst based application
+App::DynIP - Catalyst based application
 
 =head1 SYNOPSIS
 
@@ -67,7 +67,7 @@ DynIP - Catalyst based application
 
 =head1 SEE ALSO
 
-L<DynIP::Controller::Root>, L<Catalyst>
+L<App::DynIP::Controller::Root>, L<Catalyst>
 
 =head1 AUTHOR
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env perl
 
 use Catalyst::ScriptRunner;
-Catalyst::ScriptRunner->run('DynIP', 'Test');
+Catalyst::ScriptRunner->run('App::DynIP', 'Test');
 
 1;
 

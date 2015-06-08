@@ -1,7 +1,7 @@
 #!/usr/bin/env perl
 
 use Catalyst::ScriptRunner;
-Catalyst::ScriptRunner->run('DynIP', 'CGI');
+Catalyst::ScriptRunner->run('App::DynIP', 'CGI');
 
 1;
 

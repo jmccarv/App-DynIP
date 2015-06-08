@@ -6,8 +6,8 @@ use Module::Install::Catalyst; # Complain loudly if you don't have
                                # Catalyst::Devel installed or haven't said
                                # 'make dist' to create a standalone tarball.
 
-name 'DynIP';
-all_from 'lib/DynIP.pm';
+name 'App-DynIP';
+all_from 'lib/App/DynIP.pm';
 
 requires 'Catalyst::Runtime' => '5.90065';
 requires 'Catalyst::Plugin::ConfigLoader';

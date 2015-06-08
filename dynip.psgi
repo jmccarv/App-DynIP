@@ -1,8 +1,8 @@
 use strict;
 use warnings;
 
-use DynIP;
+use App::DynIP;
 
-my $app = DynIP->apply_default_middlewares(DynIP->psgi_app);
+my $app = App::DynIP->apply_default_middlewares(App::DynIP->psgi_app);
 $app;
 
