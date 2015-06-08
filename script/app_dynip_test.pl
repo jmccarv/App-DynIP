@@ -7,18 +7,18 @@ Catalyst::ScriptRunner->run('App::DynIP', 'Test');
 
 =head1 NAME
 
-dynip_test.pl - Catalyst Test
+app_dynip_test.pl - Catalyst Test
 
 =head1 SYNOPSIS
 
-dynip_test.pl [options] uri
+app_dynip_test.pl [options] uri
 
  Options:
    --help    display this help and exits
 
  Examples:
-   dynip_test.pl http://localhost/some_action
-   dynip_test.pl /some_action
+   app_dynip_test.pl http://localhost/some_action
+   app_dynip_test.pl /some_action
 
  See also:
    perldoc Catalyst::Manual

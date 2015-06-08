@@ -34,7 +34,7 @@ Log::Any::Adapter->set('Catalyst', logger => __PACKAGE__->log);
 
 # Configure the application.
 #
-# Note that settings in dynip.conf (or other external
+# Note that settings in app_dynip.conf (or other external
 # configuration file that you set up manually) take precedence
 # over this when using ConfigLoader. Thus configuration
 # details given here can function as a default configuration,

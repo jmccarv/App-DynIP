@@ -7,7 +7,7 @@ Catalyst::ScriptRunner->run('App::DynIP', 'CGI');
 
 =head1 NAME
 
-dynip_cgi.pl - Catalyst CGI
+app_dynip_cgi.pl - Catalyst CGI
 
 =head1 SYNOPSIS
 

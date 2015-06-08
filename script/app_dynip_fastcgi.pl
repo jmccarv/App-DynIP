@@ -7,11 +7,11 @@ Catalyst::ScriptRunner->run('App::DynIP', 'FastCGI');
 
 =head1 NAME
 
-dynip_fastcgi.pl - Catalyst FastCGI
+app_dynip_fastcgi.pl - Catalyst FastCGI
 
 =head1 SYNOPSIS
 
-dynip_fastcgi.pl [options]
+app_dynip_fastcgi.pl [options]
 
  Options:
    -? --help      display this help and exit

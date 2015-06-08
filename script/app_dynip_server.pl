@@ -11,11 +11,11 @@ Catalyst::ScriptRunner->run('App::DynIP', 'Server');
 
 =head1 NAME
 
-dynip_server.pl - Catalyst Test Server
+app_dynip_server.pl - Catalyst Test Server
 
 =head1 SYNOPSIS
 
-dynip_server.pl [options]
+app_dynip_server.pl [options]
 
    -d --debug           force debug mode
    -f --fork            handle each request in a new process

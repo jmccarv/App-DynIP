@@ -10,11 +10,11 @@ Catalyst::ScriptRunner->run('App::DynIP', 'Create');
 
 =head1 NAME
 
-dynip_create.pl - Create a new Catalyst Component
+app_dynip_create.pl - Create a new Catalyst Component
 
 =head1 SYNOPSIS
 
-dynip_create.pl [options] model|view|controller name [helper] [options]
+app_dynip_create.pl [options] model|view|controller name [helper] [options]
 
  Options:
    --force        don't create a .new file where a file to be created exists
@@ -22,14 +22,14 @@ dynip_create.pl [options] model|view|controller name [helper] [options]
    --help         display this help and exits
 
  Examples:
-   dynip_create.pl controller My::Controller
-   dynip_create.pl --mechanize controller My::Controller
-   dynip_create.pl view My::View
-   dynip_create.pl view HTML TT
-   dynip_create.pl model My::Model
-   dynip_create.pl model SomeDB DBIC::Schema MyApp::Schema create=dynamic\
+   app_dynip_create.pl controller My::Controller
+   app_dynip_create.pl --mechanize controller My::Controller
+   app_dynip_create.pl view My::View
+   app_dynip_create.pl view HTML TT
+   app_dynip_create.pl model My::Model
+   app_dynip_create.pl model SomeDB DBIC::Schema MyApp::Schema create=dynamic\
    dbi:SQLite:/tmp/my.db
-   dynip_create.pl model AnotherDB DBIC::Schema MyApp::Schema create=static\
+   app_dynip_create.pl model AnotherDB DBIC::Schema MyApp::Schema create=static\
    [Loader opts like db_schema, naming] dbi:Pg:dbname=foo root 4321
    [connect_info opts like quote_char, name_sep]
 
