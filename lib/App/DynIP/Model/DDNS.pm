@@ -52,9 +52,10 @@ sub update {
         stdin => \@update
     )->run;
 
-    $log->debug("Running on_change script ".$self->on_change) if $self->on_change;
-    Proc::Lite->exec($self->on_change, $hostname, $old_ip, $addr)
-        if $self->on_change;
+    if ($self->on_change) {
+        $log->debug("Running on_change script ".$self->on_change);
+        Proc::Lite->exec($self->on_change, $hostname, $old_ip, $addr);
+    }
 
     unless ($p->success) {
         $log->error("nsupdate failed, command was:");
