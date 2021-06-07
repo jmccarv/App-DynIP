@@ -15,7 +15,7 @@ sub update :Local :Args(2) {
     my ( $self, $c, $hostname, $ip ) = @_;    
 
     $c->detach('/internal_error') 
-        unless $c->model->update($hostname, $ip);
+        unless $c->model->update($hostname, $ip, 1);
 
     $c->res->status(200);
     $c->res->body('');

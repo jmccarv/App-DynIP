@@ -9,6 +9,7 @@ BEGIN { extends 'Catalyst::Model' }
 has nsupdate_key => ( is => 'ro', isa => 'Str', required => 1 );
 has domain       => ( is => 'ro', isa => 'Str', required => 1 );
 has name_server  => ( is => 'ro', isa => 'Str', required => 1 );
+has on_change    => ( is => 'ro', isa => 'Str' );
 
 sub fqdn {
     my ( $self, $hostname ) = @_;
@@ -16,7 +17,7 @@ sub fqdn {
 }
 
 sub update {
-    my ( $self, $hostname, $addr ) = @_;
+    my ( $self, $hostname, $addr, $force ) = @_;
 
     die 'nsupdate_key not readable: '.$self->nsupdate_key
         unless -r $self->nsupdate_key;
@@ -26,7 +27,8 @@ sub update {
 
     my $fqdn = $self->fqdn($hostname);
 
-    if (defined $addr && $self->get_ip($hostname) eq $addr) {
+    my $old_ip = $self->get_ip($hostname);
+    if (defined $addr && !$force && $old_ip eq $addr) {
         $log->debug("No need to update $fqdn, update requested would make no change");
         return 1;
     }
@@ -49,6 +51,10 @@ sub update {
         command => [qw(nsupdate -k), $self->nsupdate_key ],
         stdin => \@update
     )->run;
+
+    $log->debug("Running on_change script ".$self->on_change) if $self->on_change;
+    Proc::Lite->exec($self->on_change, $hostname, $old_ip, $addr);
+        if $self->on_change;
 
     unless ($p->success) {
         $log->error("nsupdate failed, command was:");
