@@ -20,6 +20,7 @@ requires 'Log::Any';
 requires 'Log::Any::Adapter::Catalyst';
 requires 'Config::General'; # This should reflect the config file format you've chosen
                  # See Catalyst::Plugin::ConfigLoader for supported formats
+requires 'FCGI::ProcManager';
 test_requires 'Test::More' => '0.88';
 catalyst;
 
